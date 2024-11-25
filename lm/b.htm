@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>	
+		function  f() {
+			console.log(document.getElementById("r").innerHtml)
+			let a=new Date(Date.now())
+			a.setDate(document.getElementById("d").value)
+			a.setMonth(document.getElementById("m").value-1)
+			a.setYear(document.getElementById("y").value)
+			document.getElementById("r").innerHTML=a.toDateString()
+		}
+	</script>
+</head>
+<body>
+	<h1 > calcula dias</h1>
+	<form>
+		<label>
+		Año
+		</label>
+		<input id="y" type="number">
+		<label>
+		Mes
+		</label>
+		<input id="m" type="number">
+		<label>
+		dia
+		</label>
+		<input id="d" type="number">
+		<button type="button" onclick="f()">calculame!!!</button>
+	</form>	
+	<p id="r"></p>
+</body>
+</html>

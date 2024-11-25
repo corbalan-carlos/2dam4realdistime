@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>	
+		function  s() {
+			document.getElementById("r").innerHTML=Number(document.getElementById("op1").value)+Number(document.getElementById("op2").value)
+		}
+		function  r() {
+		document.getElementById("r").innerHTML=document.getElementById("op1").value-document.getElementById("op2").value
+		}
+		function  m() {
+		document.getElementById("r").innerHTML=document.getElementById("op1").value*document.getElementById("op2").value
+		}
+		function  d() {
+		document.getElementById("r").innerHTML=document.getElementById("op1").value /document.getElementById("op2").value
+		}
+	</script>
+</head>
+<body>
+	<form>
+		<label> Introduzca operando1:</label>
+		<input type="number" id="op1">
+		<br>
+		<label> Introduzca operando2:</label>
+		<input type="number" id="op2">
+		<br>
+		<button type="button" onclick="s()">+</button>
+		<button type="button" onclick="r()">-</button>
+		<button type="button" onclick="m()">*</button>
+		<button type="button" onclick="d()">/</button>
+	</form>
+	<p id="r"></p>
+</body>
+</html>
