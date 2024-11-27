@@ -1,0 +1,26 @@
+<html>
+<head>
+	<script>
+	function f() {
+		let max=document.getElementById("b").value
+		let n=document.getElementById("a").value
+		let r=document.getElementById("r")
+		for (var i=1;i<=max;i++) {
+			r.innerHTML+= i+"*"+n+"="+Number(i*n)+"<br>"
+		}
+	}
+	</script>
+</head>
+<body>
+	<h1> Tablas de multiplicar</h1>
+	<form>
+		<label> Tabla a visualizar </label>
+		<input type="number" id="a">
+		<label> N de ocurrencias </label>
+		<input type="number" id="b">
+		<button type="button"   onclick="f()">click mee!!!</button>
+	</form>
+	<p id="r">
+	
+	
+</body>

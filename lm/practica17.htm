@@ -1,0 +1,47 @@
+<html>
+<head>
+	<script>
+	function f() {
+		let max=document.getElementById("c").value
+		let n=document.getElementById("a").value
+		let r=document.getElementById("r")
+		let i=document.getElementById("i").value
+		let arr=[];
+		r.innerHTML="<tr id=\"header\">"
+		for (ii=1;ii<=i;ii++) {
+			r.innerHTML+="<tr id="+ii+">"
+			r.innerHTML+="</tr>"
+			
+		}
+		let header=document.getElementById("header")
+		for (ii=1;ii<=i;ii++) {
+			let row=document.getElementById(ii)
+			ni=n
+			for (;ni<=max;ni++){
+				if (ii==1) header.innerHTML+="<th>"+ni+"</th>"
+				row.innerHTML+="<td>"+ni*ii+"</td>"
+			
+			}
+		}
+	}
+	</script>
+</head>
+<body>
+	<h1> Tablas de multiplicar</h1>
+	<form>
+		<label> Tablas a visualizar </label>
+		<br>
+		<input type="number" id="a" value="minimo">
+		<input type="number" id="c" value="maximo">
+		<br>
+		<label> N de ocurrencias </label>
+		<input type="number" id="i">
+		<br>
+		<button type="button"   onclick="f()">click mee!!!</button>
+	</form>
+	<table id="tabla">
+		<tbody id="r">
+		</tbody>
+	</table>	
+	
+</body>
