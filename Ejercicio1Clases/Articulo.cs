@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Ejercicio1Clases
 {
-    internal class Articulo
+    public class Articulo
     {
         int codigoArticulo;
-        private static int counter;
+        static int counter;
         string nombreArticulo;
-        enum categoriaArticuloE
+        public enum categoriaArticuloE
         {
             INFORMATICA =0b0001,
             IMAGEN = 0b0010,
@@ -64,6 +64,10 @@ namespace Ejercicio1Clases
         {
             get { return existenciasArticulo; }
             set { existenciasArticulo = value; }
+        }
+        static public int Contador
+        {
+            get { return counter; }
         }
         /*public int actualizarExistencias(int cantidadPedido)
         {
