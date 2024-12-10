@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "practica0", "practicas\practica0.csproj", "{B57521AE-73E3-4841-8B24-026AD601481C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practica3", "Practica3\Practica3.csproj", "{40D9B565-42DF-4002-885C-5FAF932AB33C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "practica4", "practica4\practica4.csproj", "{665D82CE-D95C-4BFE-B903-0F30827D7634}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B57521AE-73E3-4841-8B24-026AD601481C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B57521AE-73E3-4841-8B24-026AD601481C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B57521AE-73E3-4841-8B24-026AD601481C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B57521AE-73E3-4841-8B24-026AD601481C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40D9B565-42DF-4002-885C-5FAF932AB33C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D9B565-42DF-4002-885C-5FAF932AB33C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D9B565-42DF-4002-885C-5FAF932AB33C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D9B565-42DF-4002-885C-5FAF932AB33C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{665D82CE-D95C-4BFE-B903-0F30827D7634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665D82CE-D95C-4BFE-B903-0F30827D7634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665D82CE-D95C-4BFE-B903-0F30827D7634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665D82CE-D95C-4BFE-B903-0F30827D7634}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E2D1C76-2035-4FC4-8A00-B2FAC8C093F5}
+	EndGlobalSection
+EndGlobal
