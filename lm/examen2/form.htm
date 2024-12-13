@@ -1,0 +1,120 @@
+<html>
+<head>
+</head>
+<body>
+	<h1> Formulario de inscripcion a actividades</h1>
+	<h2> Utiliza tablas para un mejor resultado en la alineacion de los comapos del formulario</h2>
+	<table>
+	<tr>
+		<td> Instrucciones </td>
+		<td> Alta </td>
+	</tr>
+	<tr>
+		<td> Para darse de alta en esta web debe completar los siguientes datos:</td>
+		<td> Todos los campos son obligatorios </td> 
+	</tr>
+	<tr>
+	<td>
+	<ol>
+		<li> Su nombre y apellidos</li>
+		<li> Su fecha de nacimiento </li>
+		<li> Su direccion </li>
+		<li> Su genero </li>
+		<li> Sus aficiones </li>
+		<li> una breve descripcion de sus intereses </li>
+	</ol>
+	</td>
+	<td>
+	<form>
+	<table>
+	<tr>
+	<td>
+	<label> Nombre:</label>
+	</td>
+	<td>
+	<input type="text" min="3" max="50" placeholder="Nombre"> 
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<label> Apellidos </label>
+	</td>
+	<td>
+	<input type="text" min="3" max="100" placeholder="Apellido1 Apellido2">
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<label> Fecha de nacimiento </label>
+	</td>
+	<td>
+	<input type="date"  min="1-1-2014">
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<label> Direccion </label>
+	</td>
+	<td>
+	<textarea min="15" placeholder="Escribe tu direccion aqui" cols="30" rows="10"></textarea>
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<label>Genero</label>
+	</td>
+	<td>
+	<input type="radio" name="g">Hombre</input>
+	<input type="radio" name="g">Mujer</input>
+	<input type="radio" name="g">Otro</input>
+	</td>
+	</tr>
+	<tr>
+	<td><label>Telefono Movil</label></td>
+	<td><input type="tel"></td>
+	</tr>
+	<tr> 
+	<td>
+	<label> Afixion principal </label>
+	</td>
+	<td>
+	<select>
+		<option>Lectura</option>
+		<option>Rot in bed</option>
+		<option>Contemplar el inevitable paso del tiempo</option>
+	</select>
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<label>Estudios Realizados</label>
+	</td>
+	<td>
+	<input type="checkbox" name="studies">Primaria</input>
+	<br>
+	<input type="checkbox" name="studies">ESO</input>
+	<br>
+	<input type="checkbox" name="studies">Bachillerato</input>
+	<br>
+	<input type="checkbox" name="studies">FP Grado Medio</input>
+	<br>
+	<input type="checkbox" name="studies">FP Grado Superior</input>
+	</td>	
+	</tr>
+	<tr>
+	<td>
+	<label>Opciones:
+	</td>
+	<td>
+	<input type="reset" value="Reset">
+	<input type="submit" value="validar">
+	</td>	
+	</tr>
+	
+	</table>
+	</form>
+	</td>
+	</tr>
+	</table>
+</body>
+</html>

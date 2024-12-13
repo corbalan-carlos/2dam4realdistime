@@ -1,0 +1,48 @@
+.my {
+	border-color: white;
+	border:0px;
+	background-color: yellow;
+}
+.mg {
+	border-color: white;
+	border:0px;
+	background-color: green;
+}
+.mb {
+	border-color: white;
+	border:0px;
+	background-color: blue;
+}
+.mr {
+	border-color: white;
+	border:0px;
+	background-color:red;
+}
+.center {
+	border: 0px;
+}
+td {
+	border-color: blue;
+	width: 30px;
+}
+.y {
+	background-color:yellow;
+}
+.g {
+background-color:green;
+}
+.b {
+background-color:blue;
+}
+.r {
+background-color:red;
+}
+td.h {
+	width:60px;
+}
+body {
+	background-color:blue;
+}
+table {
+	background-color:white;
+}
