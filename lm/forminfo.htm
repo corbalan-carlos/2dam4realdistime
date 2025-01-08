@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<style>
+
+h1 {
+ 	color: green;
+}
+fieldset {
+	background-color: lightgray;
+	border: gray solid 2px;
+}
+.button {
+	background-color:white;
+	border: green solid 3px;
+	color:green;	
+	padding: 10px 20px;
+}
+br {
+	margin-top:10px;
+}
+legend {
+	color:white;
+	background-color: gray;
+}
+		</style>
+
+</head>
+<body>
+	<h1>Solicitud de informacion de ciclos formativos</h1>
+	<form>
+		<fieldset>
+		<legend>Completar este formulario</legend>	
+		<label>Seleccione su color favorito:</label>
+		<input type="color"></input>
+		<br>
+		<label>Seleccione el lenguaje de programacion</label>
+		<select>
+			<option>Java</option>
+			<option>Python</option>
+			<option>HTML</option>
+			<option>Visual Basic</option>
+		</select>
+		<br>
+		<label>Marque los ciclos en los que está interesado:</label>
+		<input type="checkbox">ASIR</input>
+		<input type="checkbox">DAM</input>
+		<input type="checkbox">DAW</input>
+		<br>
+		<label> Información adicional</label>
+		<br>
+		<textarea>Por favor, escriba Aqui</textarea>
+		</fieldset>
+		<br>
+		<fieldset>
+		<legend>Rellene las opciones siguientes</legend>
+		<label>Seleccione fecha de comienzo</label>
+		<input type="date"></input>
+		<br>
+		<label>Adjunte su CV</label>
+		<input type="file">
+		<br>
+		<label>Seleccione su ciclo prioritario</label>
+		<br>
+		<select size="4">
+			<option value="SMIR">SMIR</option>
+			<option value="ASIR">ASIR</option>
+			<option value="DAM">DAM</option>
+			<option value="DAW">DAW</option>
+		</select>
+		</fieldset>
+		<input type="button" class="button" value="Enviar">
+		<input type="reset" class="button" value="Resetear">
+	</form>
+
+
+</body></html>

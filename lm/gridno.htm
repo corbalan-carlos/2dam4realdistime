@@ -1,0 +1,27 @@
+<html>
+<head>
+<style>
+#container {
+	display: grid;
+	grid-template-rows: auto auto auto;
+	grid-template-columns: auto auto;
+}
+div {
+	background-color:red;
+}
+#item1 {
+	background-color:blue;
+	grid-column: 1 / span 2;
+}
+</style>
+</head>
+<body>
+	<div id="container">
+		<div id="item1">Item 1</div>
+		<div>Item 2</div>
+		<div>Item 3</div>
+		<div></div>
+		<div>Item 4</div>
+	</div>
+</body>
+</html>
