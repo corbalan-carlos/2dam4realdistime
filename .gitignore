@@ -403,5 +403,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /.metadata/
-.class
+*.class
 *.so
+*.jar
