@@ -408,3 +408,4 @@ FodyWeavers.xsd
 *.zip
 *.tar.gz
 *.tar
+*.jar
