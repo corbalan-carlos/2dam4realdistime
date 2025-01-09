@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="hola">
+        <item name="android:textSize">@dimen/texto_titulo</item>
+    </style>
+</resources>
