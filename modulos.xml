@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE modulos [
+	<!ELEMENT dam (module+)>
+	<!ELEMENT module (content)>
+	<!ELEMENT content (unit+)>
+	<!ELEMENT unit EMPTY>
+	<!ATTLIST module title CDATA #REQUIRED>
+]>
+<dam>
+	<module title="LM">
+		<content>
+			<unit>
+			hola caracola
+			</unit>
+		</content>
+	</module>
+	<module title="PMul">
+		<content>
+			<unit>
+			hola caracola
+			</unit>
+		</content>
+	</module>
+	<module title="SGE">
+
+		<content>
+			<unit>
+			hola caracola
+			</unit>
+		</content>
+	</module>
+</dam>	

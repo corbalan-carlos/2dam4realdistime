@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Consultas [
+<!ELEMENT CentroMedico (Consulta+)>
+<!ATTLIST CentroMedico Fecha CDATA #REQUIRED
+			Nombre CDATA #REQUIRED>
+<!ELEMENT Consulta (Compañia, HoraAsignada,HoraLlamada,TiempoEspera)>
+<!ATTLIST Consulta Codigo ID #REQUIRED 
+		Estado (C|O|D) "O">
+<!ELEMENT HoraAsignada EMPTY>
+<!ATTLIST HoraAsignada Hora CDATA #REQUIRED>
+<!ELEMENT HoraLlamada EMPTY>
+<!ATTLIST HoraLlamada Hora CDATA #REQUIRED>
+<!ELEMENT TiempoEspera EMPTY>
+<!ATTLIST TiempoEspera Tiempo CDATA #REQUIRED>
+<!ELEMENT Compañia (Privada|Publica)>
+<!ELEMENT Privada EMPTY>
+<!ATTLIST Privada Nombre CDATA #REQUIRED>
+<!ELEMENT Publica EMPTY>
+]>	
+<CentroMedico Fecha="14/1/2025" Nombre="Hola">
+	<Consulta Codigo="05EDC" >
+		<Compañia>
+			<Publica/>
+		</Compañia>
+		<HoraAsignada Hora="10:00"/>
+		<HoraLlamada Hora="10:30"/>
+		<TiempoEspera Tiempo="30m"/>
+	</Consulta>
+	<Consulta Codigo="00w00" >
+		<Compañia>
+			<Privada Nombre="Balls"/>
+		</Compañia>
+		<HoraAsignada Hora="10:00"/>
+		<HoraLlamada Hora="10:30"/>
+		<TiempoEspera Tiempo="30m"/>
+	</Consulta>
+</CentroMedico>

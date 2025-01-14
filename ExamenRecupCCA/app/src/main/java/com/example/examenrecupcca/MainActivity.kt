@@ -66,10 +66,14 @@ class MainActivity : ComponentActivity() {
 			}
 		}
 	}
+	/*
+	La vista principal cuenta con tanto el remember de las variables de login
+	 */
 	@Composable
 	fun mainView (modifier:Modifier = Modifier) {
 		val remNombre = remember { nombre }
 		val remEdad = remember { edad }
+		//La estructura base de la actividad
 		Scaffold (
 			topBar = {
 					Image(painter = painterResource(id=R.drawable.anothertrillion), null,
@@ -103,6 +107,9 @@ class MainActivity : ComponentActivity() {
 			}
 		}
 	}
+	/*
+	Los dos campos requeridos para la vista "Acerca de"
+	*/
 	@Composable
 	fun login(modifier: Modifier = Modifier) {
 			Row (Modifier.defaultMinSize(Dp(120f))) {
@@ -128,6 +135,10 @@ class MainActivity : ComponentActivity() {
 			}
 		
 	}
+	/*
+	 El boton "Salir" de abajo de la actividad
+	 sale de la aplicacion (lol)
+	 */
 	@Composable
 	fun close(modifier: Modifier= Modifier) {
 		Row( horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth().padding(vertical = Dp(15f))) {
