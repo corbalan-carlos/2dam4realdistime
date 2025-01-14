@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pizzas [
+   <!ELEMENT pizzas (ingredientes, tipos)>
+   <!ELEMENT ingredientes (ingrediente)*>
+      <!ELEMENT ingrediente (#PCDATA)>
+         <!ATTLIST ingrediente coding ID #REQUIRED>
+   <!ELEMENT tipos (tipo)*>
+      <!ELEMENT tipo EMPTY>
+         <!ATTLIST tipo nombre CDATA #REQUIRED>
+         <!ATTLIST tipo ingredientes IDREFS #REQUIRED>
+]>
+<pizzas>
+    <ingredientes>
+        <ingrediente coding="pinia_1">
+            piña
+        </ingrediente>
+    </ingredientes>
+    <tipos>
+        <tipo nombre="hawaina" ingredientes="pinia_1" />
+    </tipos>
+</pizzas>

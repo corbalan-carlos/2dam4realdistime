@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hola</string>
+    <string name="title_activity_main">Actividad principal</string>
+    <string name="app_name">MultiligüalCCA</string>
+</resources>
