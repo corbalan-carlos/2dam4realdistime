@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Scanner;
@@ -13,9 +14,9 @@ import com.mysql.cj.jdbc.ConnectionGroup;
 public class Main {
 
 	static public void main(String[] args) throws ClassNotFoundException {
-		
+		//"pass" para clase "password" para casa
 		try (Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/empleados_departamentos",
-				"emp_dpt", "password"); Scanner sc=new Scanner(System.in)){
+				"emp_dpt", "pass"); Scanner sc=new Scanner(System.in)){
 			System.out.println("Conexion hecha correctamente");
 			String a;
 			do {
@@ -25,6 +26,10 @@ public class Main {
 							break;
 				case ("2"): deleteFromEmpleado(conn, sc);
 							break;
+				case ("3"): updateEmpleado(conn,sc);
+							break;
+				case ("4"): mostrarEmpleados(conn,sc);
+							break;
 				}
 			} while(!a.matches("0"));
 		} catch (SQLException e) {
@@ -32,6 +37,95 @@ public class Main {
 			System.exit(1);
 		}
 		
+	}
+	/*lo odio*/
+	private static void updateEmpleado(Connection conn, Scanner sc) {
+		String[] parameters=new String[9];
+		
+		try {
+			System.out.print("Escribe el DNI del empleado en cuestión:");
+			String s=sc.nextLine();
+			ResultSet r=conn.createStatement().executeQuery("select count(*) from empleados where nDIEmp=\""+s+"\"");
+			r.next();
+			if (
+					r.getInt(1)==0
+				) {
+				System.out.print("Empleado no encontrado\n");
+				return;
+			}
+			r=conn.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE).executeQuery("select * from empleados where nDIEmp=\""+s+"\"");
+			r.next();
+			
+			System.out.format("DNI:%s Nombre: %s Sexo: %s\nFechaNac: %s FechaInc: %s Salario:%f Comison:%s\nCargo: %s Jefe: %s Dpto:%s\n",
+					r.getString(1), r.getString(2), r.getString(3), r.getDate(4).toString(), r.getDate(5).toString(), r.getFloat(6), r.getFloat(7),
+					r.getString(8),r.getString(9),r.getString(10)
+					);
+			System.out.print("Escribe el nuevo valor para los campos (Dejar vacio para ignorarlo)\n");
+			System.out.print("Nombre:");
+			parameters[0]=sc.nextLine();
+			System.out.print("Sexo: ");
+			parameters[1]=sc.nextLine();
+			System.out.print("Fecha Nac (YYYY-MM-DD):");
+			parameters[2]=sc.nextLine();
+			System.out.print("Fecha Inco (YYYY-MM-DD):");
+			parameters[3]=sc.nextLine();
+			System.out.print("Salario:");
+			parameters[4]=sc.nextLine();
+			System.out.print("Comision: ");
+			parameters[5]=sc.nextLine();
+			System.out.print("Cargo: ");
+			parameters[6]=sc.nextLine();
+			System.out.print("Jefe: ");
+			parameters[7]=sc.nextLine();
+			System.out.print("Depto: ");
+			parameters[8]=sc.nextLine();
+			if (parameters[0]!="") {
+				r.updateString(2, parameters[0]);
+			}
+			if (parameters[1]!="") {
+				r.updateString(3, parameters[1]);
+			}
+			if (parameters[2]!="") {
+				r.updateString(4, parameters[2]);
+			}
+			if (parameters[3]!="") {
+				r.updateDate(5, Date.valueOf(parameters[3]));
+			}
+			if (parameters[4]!="") {
+				r.updateDate(6, Date.valueOf(parameters[4]));
+			}
+			if (parameters[5]!="") {
+				r.updateFloat(7, Float.parseFloat(parameters[5]));
+			}
+			if (parameters[6]!="") {
+				r.updateFloat(8, Float.parseFloat(parameters[6]));
+			}
+			if (parameters[7]!="") {
+				r.updateFloat(9, Float.parseFloat(parameters[7]));
+			}
+			if (parameters[8]!="") {
+				r.updateFloat(10, Float.parseFloat(parameters[8]));
+				
+			}
+			r.updateRow();
+		} catch (SQLException e) {
+			System.out.print("Algo ha salido mal, aqui está el mensaje mas explicado\n");
+			System.out.print(e.getMessage());		
+		}
+	}
+	private static void mostrarEmpleados(Connection conn, Scanner sc) {
+		try {
+			ResultSet r=conn.createStatement().executeQuery("select * from empleados");
+			while (r.next()) {
+				System.out.format("DNI:%s Nombre: %s Sexo: %s\nFechaNac: %s FechaInc: %s Salario:%f Comison:%s\nCargo: %s Jefe: %s Dpto:%s\n",
+						r.getString(1), r.getString(2), r.getString(3), r.getDate(4).toString(), r.getDate(5).toString(), r.getFloat(6), r.getFloat(7),
+						r.getString(8),r.getString(9),r.getString(10)
+						);	
+			}
+		} catch (SQLException e) {
+			System.out.print("Algo ha salido mal, aqui está el mensaje mas explicado\n");
+			System.out.print(e.getMessage());
+		}
 	}
 	private static void deleteFromEmpleado(Connection conn,Scanner sc) {
 		try {
@@ -90,7 +184,7 @@ public class Main {
 		stmt.setString(i++, depto);
 		stmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.print("Algo ha salido mal, aqui está el mensaje mas explicado");
+			System.out.print("Algo ha salido mal, aqui está el mensaje mas explicado\n");
 			System.out.print(e.getMessage());
 		} 
 	}
