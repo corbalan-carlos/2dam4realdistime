@@ -1,5 +1,23 @@
 <resources>
-    <string name="app_name">ExamenRecupCCA</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_main2">MainActivity2</string>
+        <array name="sArr">
+            <item>Id</item>
+            <item>Name</item>
+            <item>Middle Name</item>
+            <item>Surname</item>
+            <item>Gender</item>
+            <item>Birthdate</item>
+            <item>Height</item>
+            <item>Phone Number</item>
+            <item>Mail</item>
+            <item>Observations</item>
+        </array>
+        <array name="gender">
+            <item>Male
+            </item>
+            <item>Female</item>
+            <item>Other</item>
+        </array>
+    <string name="app_name" translatable="false">Ballin\n</string>
+    <string name="title_activity_main" translatable="false">MainActivity\n\n</string>
+    <string name="title_activity_main2" translatable="false">MainActivity2\n</string>
 </resources>

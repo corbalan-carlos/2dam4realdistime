@@ -16,7 +16,7 @@ public class Main {
 	static public void main(String[] args) throws ClassNotFoundException {
 		//"pass" para clase "password" para casa
 		try (Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/empleados_departamentos",
-				"emp_dpt", "pass"); Scanner sc=new Scanner(System.in)){
+				"emp_dpt", "password"); Scanner sc=new Scanner(System.in)){
 			System.out.println("Conexion hecha correctamente");
 			String a;
 			do {
@@ -30,6 +30,10 @@ public class Main {
 							break;
 				case ("4"): mostrarEmpleados(conn,sc);
 							break;
+				case ("5"): insertIntoDepartamentos(conn,sc);
+							break;
+				case ("6"): deleteFromDepartamentos(conn,sc);
+							break;
 				}
 			} while(!a.matches("0"));
 		} catch (SQLException e) {
@@ -37,6 +41,35 @@ public class Main {
 			System.exit(1);
 		}
 		
+	}
+	private static void deleteFromDepartamentos(Connection conn, Scanner sc) {
+		/*
+		 * Preguntar al profesor como se puede borrar el departamento cuando hay 
+		 * constraints respecto a la tabla empleados
+		 */
+	}
+	private static void insertIntoDepartamentos(Connection conn, Scanner sc) {
+		try {
+			PreparedStatement stmt=conn.prepareStatement("insert into empleados values (?,?,?,?)");
+			String codDepto,nombreDepto,ciudad,codDirector;
+			System.out.print("Insertar en la tabla \"empleados\"\n");
+			System.out.print("Codigo del departamento: ");
+			codDepto=sc.nextLine();
+			System.out.print("Nombre del departamento: ");
+			nombreDepto=sc.nextLine();
+			System.out.print("Ciudad: ");
+			ciudad=sc.nextLine();
+			System.out.print("Codigo del director: ");
+			codDirector=sc.nextLine();
+			stmt.setString(1, codDepto);
+			stmt.setString(2, nombreDepto);
+			stmt.setString(3, ciudad);
+			stmt.setString(4, codDirector);
+			stmt.execute();
+		} catch (SQLException e) {
+			System.out.print("Algo ha salido mal, aqui está el mensaje mas explicado\n");
+			System.out.print(e.getMessage());		
+		}
 	}
 	/*lo odio*/
 	private static void updateEmpleado(Connection conn, Scanner sc) {
