@@ -9,14 +9,12 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Scanner;
 
-import com.mysql.cj.jdbc.ConnectionGroup;
-
 public class Main {
 
 	static public void main(String[] args) throws ClassNotFoundException {
 		//"pass" para clase "password" para casa
 		try (Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/empleados_departamentos",
-				"emp_dpt", "password"); Scanner sc=new Scanner(System.in)){
+				"emp_dpt", "pass"); Scanner sc=new Scanner(System.in)){
 			System.out.println("Conexion hecha correctamente");
 			String a;
 			do {
@@ -42,11 +40,36 @@ public class Main {
 		}
 		
 	}
+	/*
+	 * No estoy seguro a la portabilidad de este codigo, 
+	 * supuestamente deberia funcionar con MySQL v 9.10 community
+	 * utiliza el codigo devuelto por la SQLException para saber 
+	 * si se ha intentado borrar una fila padre y actuar correspondientemente
+	 */
 	private static void deleteFromDepartamentos(Connection conn, Scanner sc) {
-		/*
-		 * Preguntar al profesor como se puede borrar el departamento cuando hay 
-		 * constraints respecto a la tabla empleados
-		 */
+		try {
+			System.out.print("Introduzca el nombre del departamento a borrar:");
+			String s =sc.nextLine();
+			ResultSet r=conn.createStatement().executeQuery("select nombreDpto, ciudad from departamentos where nombreDpto=\""+s+"\"");
+			if (!r.next()) {
+				System.out.print("Departamento no encontrado\n");
+				return;
+			}
+			do {
+				System.out.print("Departamento:"+s+" Localizado en: "+r.getString(2)+"\n");
+			} while (r.next());
+			System.out.print("Introduzca la ciudada del departamento:");
+			String s1=sc.nextLine();
+			conn.createStatement().executeUpdate("delete from departamentos where nombreDpto=\""+s+"\" and ciudad=\""+s1+"\"");
+		
+		} catch (SQLException e) {
+			if (e.getErrorCode()==23000) {
+				System.out.print("El departamento siendo borrado tiene filas descendendientes, no se puede realizar la operación\n");
+			} else {
+				System.out.print("Algo ha salido mal, aqui está el mensaje mas explicado\n");
+				System.out.print(e.getMessage());
+			}
+		}
 	}
 	private static void insertIntoDepartamentos(Connection conn, Scanner sc) {
 		try {

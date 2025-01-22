@@ -1,0 +1,32 @@
+<xs:schema xlmns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:simpleType name="cPostalT">
+	<xs:restriction base="xs:integer">
+		<xs:minInclusive value="00001"/>
+		<xs:minInclusive value="9999"/>
+	</xs:restriction>
+<xs:simpleType>
+</xs:simpleType>
+<xs:element name="persona">
+	<xs:element name="nombre" type="token">
+	<xs:element name="nacimiento">
+		<xs:attribute name="anyo" type="miAnyo">
+		<xs:attribute name="mes" type="myMes">
+		<xs:attribute name="dia" type="miDia">
+	</xs:element>
+	<xs:element name="direccion" minOcurrs="1">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="calle" type="token"/>
+				<xs:element name="poblacion" type="token"/>
+				<xs:element name="provincia" type="token"/>
+				<xs:element name="cpostal" type="cPostalT"/>
+			</xs:sequences>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType>
+		<xs:choice>
+			<xs:element name="varon"/>
+			<xs:element name="femenino"/>
+		</xs:choice>
+	</xs:complexType>
+</xs:element>
