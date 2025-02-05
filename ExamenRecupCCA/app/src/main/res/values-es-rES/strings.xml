@@ -1,20 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="sArr">
-        <item>Id</item>
-        <item>Nombre</item>
-        <item>Primer Apellido</item>
-        <item>Segundo Apellido</item>
-        <item>Genero</item>
-        <item>Fecha Nacimiento</item>
-        <item>Altura</item>
-        <item>Telefono</item>
-        <item>Mail</item>
-        <item>Observaciones</item>
-    </array>
-    <array name="gender">
-        <item>Masculino</item>
-        <item>Femenino</item>
-        <item>Otro</item>
-    </array>
+
 </resources>

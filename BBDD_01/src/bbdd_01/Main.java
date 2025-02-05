@@ -14,7 +14,7 @@ public class Main {
 	static public void main(String[] args) throws ClassNotFoundException {
 		//"pass" para clase "password" para casa
 		try (Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/empleados_departamentos",
-				"emp_dpt", "pass"); Scanner sc=new Scanner(System.in)){
+				"emp_dpt", "password"); Scanner sc=new Scanner(System.in)){
 			System.out.println("Conexion hecha correctamente");
 			String a;
 			do {
@@ -32,6 +32,9 @@ public class Main {
 							break;
 				case ("6"): deleteFromDepartamentos(conn,sc);
 							break;
+				case ("7"): updateFromDepartamentos(conn,sc);
+							break;
+				case ("8"): mostrarDepartamentos(conn,sc);
 				}
 			} while(!a.matches("0"));
 		} catch (SQLException e) {
@@ -39,6 +42,65 @@ public class Main {
 			System.exit(1);
 		}
 		
+	}
+	private static void mostrarDepartamentos(Connection conn, Scanner sc) {
+		try {
+			ResultSet r=conn.createStatement().executeQuery("select * from departamentos");
+			while (r.next()) {
+					System.out.format("Codigo Departamento:%s Nombre Departamento:%s Ciudad:%s Codigo Director:%s\n",
+					r.getString(1), r.getString(2), r.getString(3), r.getString(4)
+					);
+			}
+		} catch (SQLException e) {
+			System.out.print("Algo ha salido mal, aqui está el mensaje mas explicado\n");
+			System.out.print(e.getMessage());
+		}	
+	}
+	private static void updateFromDepartamentos(Connection conn, Scanner sc) {
+		String[] parameters=new String[4];
+		
+		try {
+			System.out.print("Escribe el codDepto del departamento en cuestión:");
+			String s=sc.nextLine();
+			ResultSet r=conn.createStatement().executeQuery("select count(*) from departamentos where codDepto=\""+s+"\"");
+			r.next();
+			if (
+					r.getInt(1)==0
+				) {
+				System.out.print("Departamento no encontrado\n");
+				return;
+			}
+			r=conn.createStatement(ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_UPDATABLE).executeQuery("select * from departamentos where nDIEmp=\""+s+"\"");
+			r.next();
+			
+			System.out.format("Codigo Departamento:%s Nombre Departamento:%s Ciudad:%s Codigo Director:%s\n",
+					r.getString(1), r.getString(2), r.getString(3), r.getString(4)
+					);
+			System.out.print("Escribe el nuevo valor para los campos (Dejar vacio para ignorarlo)\n");
+			System.out.print("Codigo Departamento:");
+			parameters[0]=sc.nextLine();
+			System.out.print("Nombre Departamento: ");
+			parameters[1]=sc.nextLine();
+			System.out.print("Ciudad:");
+			parameters[2]=sc.nextLine();
+			System.out.print("Codigo Director");
+			if (parameters[0]!="") {
+				r.updateString(2, parameters[0]);
+			}
+			if (parameters[1]!="") {
+				r.updateString(3, parameters[1]);
+			}
+			if (parameters[2]!="") {
+				r.updateString(4, parameters[2]);
+			}
+			if (parameters[3]!="") {
+				r.updateString(5, parameters[3]);
+			}
+			r.updateRow();
+		} catch (SQLException e) {
+			System.out.print("Algo ha salido mal, aqui está el mensaje mas explicado\n");
+			System.out.print(e.getMessage());		
+		}	
 	}
 	/*
 	 * No estoy seguro a la portabilidad de este codigo, 
