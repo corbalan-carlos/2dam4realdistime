@@ -125,12 +125,13 @@ public class Alumno implements Repo{
 	}
 	private void validateFields() throws FieldNotValidException, IllegalAccessException {
 		for (Field f: this.getClass().getDeclaredFields()) {
-			if (!f.getAnnotation(Nullable.class).value()) {
+			if (f.getAnnotationsByType(Nullable.class).length>0 && !f.getAnnotation(Nullable.class).value()) {
 				if (f.get(this)==null) throw new FieldNotValidException("Campo "+f.getName()+" esta puesto a nulo");
 			} 
 		}
 	}
 	@Override
+<<<<<<< HEAD
 	public boolean create() {
 		try {
 			validateFields();
@@ -143,6 +144,11 @@ public class Alumno implements Repo{
 			System.exit(1);
 		}
 		return dao.insert(this);
+=======
+	public boolean create(DAO dao) throws SQLException {
+		
+
+>>>>>>> refs/remotes/origin/main
 	}
 	@Override
 	public boolean read() {
