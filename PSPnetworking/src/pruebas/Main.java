@@ -4,20 +4,33 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
 public class Main {
-
-	public static void main(String[] args) throws MalformedURLException {
-		URL url =new URL("http://localhost:8080");
-		try (BufferedReader bf=new BufferedReader(new InputStreamReader(url.openStream()))) {
-			bf.lines().forEach((String in) -> {
-				System.out.println(in);
-			});
-		} catch (IOException e) {
-			e.printStackTrace();
+	static List<Connection> conns;
+	public static void main(String[] args) throws IOException, InterruptedException {
+		ServerSocket ss=new ServerSocket(6666);
+		conns=new Vector<>();
+		Replier replier=new Replier();
+		Cleaner cleaner=new Cleaner();
+		new Thread(replier);
+		new Thread(cleaner);
+		while (true) {
+			try {
+				conns.add(new Connection(ss.accept()));
+				if (replier.eepy) {
+					replier.lock.lock();
+					replier.con.signal();
+				}
+			} catch (IOException e) {
+				conns.removeLast();
+			}
+			
 		}
-	}
-
+	}	
 }
