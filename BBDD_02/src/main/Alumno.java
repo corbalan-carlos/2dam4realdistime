@@ -131,7 +131,6 @@ public class Alumno implements Repo{
 		}
 	}
 	@Override
-<<<<<<< HEAD
 	public boolean create() {
 		try {
 			validateFields();
@@ -144,11 +143,6 @@ public class Alumno implements Repo{
 			System.exit(1);
 		}
 		return dao.insert(this);
-=======
-	public boolean create(DAO dao) throws SQLException {
-		
-
->>>>>>> refs/remotes/origin/main
 	}
 	@Override
 	public boolean read() {
@@ -179,13 +173,22 @@ public class Alumno implements Repo{
 	}
 	@Override
 	public boolean update() {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			validateFields();
+		} catch (FieldNotValidException e) {
+			
+			System.err.print(e.toString()+"Cancelando rutina\n");
+			return false;
+		} catch (IllegalAccessException e) {
+			System.err.print("Error obteniendo los campos del objeto!!\n");
+			System.exit(1);
+		}
+		return dao.update(this);	
 	}
 	@Override
 	public boolean delete() {
-		// TODO Auto-generated method stub
-		return false;
+		 if (this.nre==null) return false;
+		 return dao.delete(this);
 	}
 	
 }

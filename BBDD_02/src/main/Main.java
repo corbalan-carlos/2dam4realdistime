@@ -1,6 +1,9 @@
 package main;
 
 import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 /*
  * En un principio me gustaría haberlo hecho "bien" pero la verdad es que la escabilidad
  * y medio legibilidad es un lujo que ni me puedo permitir o que valga la pena en un 
@@ -16,13 +19,31 @@ import java.lang.reflect.Field;
  * 
  * Alguna cosa buena tiene que tener ponerle tanto overhead al proceso pero weno
  *  
+ *  Reitero que era mi intencion pero no lo he llegado a hacer
  */
 public class Main {
 	public static void main(String[] args) throws IllegalAccessException, FieldNotValidException {
-<<<<<<< HEAD
-=======
-		// TODO Auto-generated method stub
->>>>>>> refs/remotes/origin/main
+		try (Connection conn=DriverManager.getConnection("jdbc:mysql://localhost/empleados_departamentos", "emp_dpt", "password")) {
+			new Alumno(conn);
+			Alumno a=Alumno.AlumnoFactory();
+			a.nre="14323073";
+			a.read();
+			System.out.print(a.dni+" "+a.nombre+"\n");
+			a.nre="0";
+			a.dni="0";
+			if (!a.create()) System.out.print("vaya...");
+			a.read();
+			System.out.print(a.nre+" "+a.nombre+"\n");
+			a.nombre="hola";
+			a.update();
+			a.read();
+			System.out.print(a.nre+" "+a.nombre+"\n");
+			a.delete();
+			if (a.read()) System.err.print("mierda");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.print("uh oh");
+		}
 	}
 
 }

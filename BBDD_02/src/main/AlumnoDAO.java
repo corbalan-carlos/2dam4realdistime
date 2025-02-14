@@ -9,9 +9,9 @@ import com.mysql.cj.MysqlType;
 
 public class AlumnoDAO extends SQLDAO {
 	static private final String INSERT= "insert into alumno values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	static private final String SELECT= "select from alumno where nre=?";
-	static private final String UPDATE= "update from alumno where nre=? values(nombre=?,apellido1=?,apellido2=?,tipo_via=?,nombre_via=?,numero=?,"
-			+ "escalera=?,piso=?,puerta=?,cp=?,pais=?,tlfn_fijo=?,tlfn_movil=?,email=?,fecha_nac=?,tutor=?)";
+	static private final String SELECT= "select * from alumno where nre=?";
+	static private final String UPDATE= "update alumno set nombre=?,apellido1=?,apellido2=?,tipo_via=?,nombre_via=?,numero=?,"
+			+ "escalera=?,piso=?,puerta=?,cp=?,pais=?,tlfn_fijo=?,tlfn_movil=?,email=?,fecha_nac=?,tutor=? where nre=?";
 	static private final String DELETE= "delete from alumno where nre=?";
 
 	AlumnoDAO(Connection conn) {
@@ -45,6 +45,7 @@ public class AlumnoDAO extends SQLDAO {
 			} else {
 				stmt.setString(18, a.tutor);
 			}
+			stmt.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			return false;
@@ -52,7 +53,7 @@ public class AlumnoDAO extends SQLDAO {
 	}
 
 	@Override
-	Alumno select(Repo r) {if (! (r instanceof Alumno))  throw new IllegalArgumentException();
+	Alumno select(Repo r) {
 		if (! (r instanceof Alumno)) throw new IllegalArgumentException();
 		Alumno a=(Alumno) r;
 		try {
@@ -90,13 +91,49 @@ public class AlumnoDAO extends SQLDAO {
 	@Override
 	boolean update(Repo r) {
 		if (!(r instanceof Alumno)) return false;
-		
+		try {
+		PreparedStatement stmt=sConn.prepareStatement(UPDATE);
+		Alumno a=(Alumno) r;
+			stmt.setString(1, a.nombre);
+			stmt.setString(2, a.apellido1);
+			stmt.setString(3, a.apellido2);
+			stmt.setString(4, a.tipo_via);
+			stmt.setString(5, a.nombre_via);
+			stmt.setString(6, a.numero);
+			stmt.setString(7, a.escalera);
+			stmt.setString(8, a.piso);
+			stmt.setString(9, a.puerta);
+			stmt.setString(10, a.cp);
+			stmt.setString(11, a.pais);
+			stmt.setString(12, a.tlfn_fijo);
+			stmt.setString(13, a.tlfn_movil);
+			stmt.setString(14, a.email);
+			stmt.setDate(15, a.fecha_nac);
+			if (a.tutor==null) {
+				stmt.setNull(16, MysqlType.FIELD_TYPE_VAR_STRING);
+			} else {
+				stmt.setString(16, a.tutor);
+			}
+			stmt.setString(17, a.nre);
+			stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
 	}
 
 	@Override
-	boolean delete(Repo rq) {
-		// TODO Auto-generated method stub
-		return false;
+	boolean delete(Repo r) {
+		if (!(r instanceof Alumno)) return false;
+		try {
+			PreparedStatement stmt=sConn.prepareStatement(DELETE);
+			Alumno a=(Alumno) r;
+			stmt.setString(1, a.nre);
+			stmt.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
 	}
 
 }

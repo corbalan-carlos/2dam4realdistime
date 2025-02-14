@@ -6,5 +6,5 @@ interface MainUIInterface {
     @Composable
     fun mainBar(activity: Activity)
     @Composable
-    fun mainBarColumn(activities:Array<String>,currentActivity: String)
+    fun mainRowActivities(activities:Array<String>,currentActivity: String)
 }

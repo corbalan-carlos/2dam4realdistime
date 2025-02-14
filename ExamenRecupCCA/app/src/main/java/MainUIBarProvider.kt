@@ -1,8 +1,9 @@
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,27 +26,27 @@ object MainUIBarProvider : MainUIInterface {
     @Composable
     override fun mainBar(activity: Activity) {
             val activities = ContextWrapper(activity).resources.getStringArray(activitiesId)
-            mainBarColumn(activities, activity.javaClass.simpleName)
+            mainRowActivities(activities, activity.javaClass.simpleName)
 
     }
 
     @Composable
-    override fun mainBarColumn(activities: Array<String>,currentActivity: String) {
+    override fun mainRowActivities(activities: Array<String>,currentActivity: String) {
         AppTheme {
-            Surface(color = MaterialTheme.colorScheme.primary,) {
+            Surface(color = MaterialTheme.colorScheme.primary, shape = MaterialTheme.shapes.small) {
                 Box(
-                    modifier = Modifier.sizeIn(minWidth = 60.dp, maxWidth = 80.dp).fillMaxHeight()
-                        .padding(top = 20.dp),
-                    contentAlignment = Alignment.TopStart
+                    modifier = Modifier.sizeIn(minHeight = 60.dp, maxHeight = 80.dp).fillMaxWidth(),
+                    contentAlignment = Alignment.Center,
+
                 ) {
-                    Column(Modifier.fillMaxWidth()) {
+                    Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
                         activities.forEach {
                             var color = MaterialTheme.colorScheme.tertiary
                             if (currentActivity == it) {
                                 color = MaterialTheme.colorScheme.secondary
                             }
                             Box(modifier = Modifier.padding(vertical = 10.dp),) {
-                                Surface(color = color) {
+                                Surface(color = color, shape = MaterialTheme.shapes.small) {
                                     Text(
                                         modifier = Modifier.padding(start = 3.dp),
                                         text = it,
@@ -66,7 +67,7 @@ object MainUIBarProvider : MainUIInterface {
 fun mainBarPreview() {
 
     val activities= arrayOf("Hola","adios","buenas","hasta luego")
-    MainUIBarProvider.mainBarColumn(activities,"buenas")
+    MainUIBarProvider.mainRowActivities(activities,"buenas")
 }
 
 
