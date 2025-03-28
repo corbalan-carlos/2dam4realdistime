@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE factura [
+	<!ELEMENT factura (emisor,cliente,detalle,importe)>	
+	<!ELEMENT articulo (cod,tipo,descripcion,cantidad,oferta?,pvp)>
+	<!ELEMENT emisor (nombre,CIF,telf)>
+	<!ELEMENT cliente (nombre,CIF,telf)>
+	<!ELEMENT detalle (articulo+)>
+	<!ELEMENT cod EMPTY>	
+	<!ELEMENT tipo EMPTY>	
+	<!ELEMENT cantidad (#PCDATA)>	
+	<!ELEMENT oferta EMPTY>	
+	<!ELEMENT pvp (#PCDATA)>	
+	<!ELEMENT nombre EMPTY>
+	<!ELEMENT CIF (#PCDATA)>
+	<!ELEMENT telf EMPTY>
+	<!ELEMENT descripcion (linea*)>
+	<!ELEMENT linea (#PCDATA)>
+	<!ELEMENT value (#PCDATA)>
+	<!ELEMENT importe EMPTY >
+	<!ATTLIST nombre value CDATA #REQUIRED>
+	<!ATTLIST telf value CDATA #REQUIRED>
+	<!ATTLIST cod value ID #REQUIRED>
+	<!ATTLIST tipo value (Libro|DVD|Varios) #IMPLIED>
+	<!ATTLIST importe value CDATA #REQUIRED>
+	<!ATTLIST factura numero CDATA #REQUIRED
+							fecha CDATA #REQUIRED>
+]>
+<factura numero="27" fecha="18/12/2013">
+	<emisor>
+		<nombre value="Libreria perez"/>
+		<CIF>44555666B </CIF>
+		<telf value="777888999"/>
+	</emisor>
+	<cliente>
+		<nombre value="Libreria Txantrea"/>
+		<CIF>33111222A</CIF>
+		<telf value="333999444" />
+	</cliente>
+	<detalle>
+		<articulo>
+			<cod value="AW7"/>
+			<tipo value="Libro"/>
+			<descripcion>
+				<linea>Analitica Web 2.0</linea>		
+			</descripcion>
+			<cantidad>1</cantidad>
+			<oferta/>
+			<pvp>25€</pvp>
+		</articulo>
+		<articulo>
+			<cod value="CP5"/>
+			<tipo value="DVD"/>
+			<descripcion>
+				<linea>Curso de HTML</linea>	
+			</descripcion>
+			<cantidad>2</cantidad>
+			<pvp>30€</pvp>
+		</articulo>
+	</detalle>
+	<importe value="85€"/>
+</factura>
