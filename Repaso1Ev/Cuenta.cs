@@ -29,6 +29,7 @@ namespace Repaso1Ev
             this.saldo = saldo;
         }
 
+        public string NCuenta { get => nCuenta.ToString(); }
         public string Titular { get => titular; set => titular = value; }
         public string Dni { get => dni; set => dni = value; }
         public double Saldo { get => Saldo; }

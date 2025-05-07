@@ -21,6 +21,8 @@ namespace Repaso1Ev
             this.interes = interes;
             this.credito = credito;
         }
+        public long Interes { get => interes; }
+        public double Credito { get => credito; }
         new public bool reintegro(double cantidad)
         {
             if (cantidad>base.Saldo) { 
