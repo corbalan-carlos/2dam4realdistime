@@ -1,0 +1,54 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="telfT">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{9}"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="libreria">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:short">
+                            <xs:minInclusive value="1000">
+                
+                            </xs:minInclusive>
+                            <xs:maxInclusive value="9999"></xs:maxInclusive>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="direccion"></xs:element>
+                <xs:element name="telefono" type="telfT"></xs:element>
+                <xs:element name="propietario">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="nombre"></xs:element>
+                            <xs:element name="telefono" type="telfT" minOccurs="0" maxOccurs="unbounded"></xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="libro">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="titulo"></xs:element>
+                            <xs:element name="autor"></xs:element>
+                            <xs:element name="formato" minOccurs="0">
+                                
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="Rustica"></xs:enumeration>
+                                        <xs:enumeration value="Tapa blanda"></xs:enumeration>
+                                        <xs:enumeration value="Tapa dura"></xs:enumeration>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                                <xs:element name="publicacion" minOccurs="0"></xs:element>
+                                <xs:element name="precio" minOccurs="0"></xs:element>
+                                <xs:element name="cantidad" minOccurs="0"></xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType> 
+    </xs:element>
+</xs:schema>

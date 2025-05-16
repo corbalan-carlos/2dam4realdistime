@@ -1,0 +1,42 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="faq">
+        <xs:complexType>
+           <xs:sequence>
+                <xs:element name="info">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="titulo"></xs:element>
+                            <xs:element name="autor"></xs:element>
+                            <xs:element name="email"></xs:element>
+                            <xs:element name="version">
+                                <xs:simpleType >
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="[0-9]\.[0-9]+"></xs:pattern>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="fecha" type="xs:date"></xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="part" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="q" minOccurs="1" maxOccurs="unbounded">
+                                <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="qtext">
+                                        
+                                    </xs:element>
+                                    <xs:element name="a"></xs:element>
+                                </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>   
+           </xs:sequence>    
+        </xs:complexType>
+        
+    </xs:element>
+</xs:schema>

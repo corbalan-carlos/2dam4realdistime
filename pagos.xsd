@@ -1,0 +1,43 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="pagos">
+       <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nombre" maxOccurs="3">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute name="dni" use="required">
+                                 <xs:simpleType>
+                                    <xs:restriction base="xs:string" >
+                                        <xs:pattern value="[A-Za-z0-9]{1,10}"></xs:pattern>
+                                  </xs:restriction>
+                                 </xs:simpleType>
+                                </xs:attribute> 
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="fechaNacimiento">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:date">
+                                <xs:attribute name="edad" use="optional">
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:byte">
+                                            <xs:maxExclusive value="25"></xs:maxExclusive>
+                                            <xs:minExclusive value="15"></xs:minExclusive>
+                                        </xs:restriction> 
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="hora" maxOccurs="unbounded"></xs:element>
+                <xs:element name="precio"></xs:element>
+                <xs:element name="cantidad" fixed="678"></xs:element>
+                <xs:element name="pagado" type="xs:boolean" default="false"></xs:element>
+            </xs:sequence>
+       </xs:complexType> 
+    </xs:element>
+</xs:schema>

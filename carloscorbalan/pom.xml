@@ -6,13 +6,25 @@
   <artifactId>carloscorbalan</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.8.1</version>
+       </plugin>
+    </plugins>
+    </build>
   <name>carloscorbalan</name>
-  <url>http://maven.apache.org</url>
-
+<repositories>
+	<repository>
+		<id>repo</id>
+		<url>https://mvnrepository.com/repos/central</url>
+	</repository>
+</repositories>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <hibernate-core.version>6.6.13.Final</hibernate-core.version>
+    <hibernate-core.version>7.0.0.CR1</hibernate-core.version>
   </properties>
 
   <dependencies>
@@ -22,6 +34,11 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+   <dependency>
+    <groupId>org.hibernate.orm</groupId>
+    <artifactId>hibernate-processor</artifactId>
+    <version>7.0.0.CR1</version>
+</dependency>
     <dependency>
     	<groupId>
     	org.hibernate.orm

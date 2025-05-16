@@ -1,4 +1,4 @@
-package infraestructura.carloscorbalan;
+package main;
 
 /**
  * Hello world!
