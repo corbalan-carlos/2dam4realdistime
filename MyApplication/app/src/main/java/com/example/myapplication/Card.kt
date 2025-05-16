@@ -32,10 +32,7 @@ import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-class Card (suit:Int, value:Int, show: Boolean){
-    val suit=suit
-    val value=value
-    val show=show
+class Card (val suit:Int, val value:Int, var show: Boolean){
     val numberToStringFormat=listOf (
 
         /*1*/"?",/*2*/"?\n?",/*3*/"?\n?\n?",/*4*/"?   ?\n?   ?",
@@ -73,10 +70,11 @@ class Card (suit:Int, value:Int, show: Boolean){
         }
         return result.toString()
     }
+
     @Composable
     fun ShowCard() {
 
-        if (show) {
+        if (this.show) {
             Box(
                 modifier = Modifier.width(100.dp).height(150.dp)
                     .clip(RoundedCornerShape(5.dp,))
