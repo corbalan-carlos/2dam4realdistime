@@ -11,13 +11,12 @@ import java.util.Stack
 
 abstract class CardStack (){
     abstract val shwocoefficient: Float
-    private val actualStack: Stack<Card> = Stack<Card>()
+    abstract val actualStack: ArrayList<Card>
     abstract fun getCards(): List<Card>
     abstract fun push(c: Card)
     abstract fun pop()
+    abstract fun peek(): Card?
     @Composable
-    fun showCards() {
-
-    }
+    abstract fun ShowCards()
     
 }
