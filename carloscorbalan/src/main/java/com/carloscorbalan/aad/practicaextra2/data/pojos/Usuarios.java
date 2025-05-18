@@ -1,16 +1,35 @@
 package com.carloscorbalan.aad.practicaextra2.data.pojos;
 
+
+
+import java.util.Collection;
+
+import org.hibernate.annotations.NamedQuery;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 @Entity
-public class Usuarios {
+@NamedQuery(
+		name="infoUsuarios",
+		query="select u.correo,count(l) as n, max(fecha),min(fecha) from Usuarios u "
+				+ "join Logs l on u=l.usuario group by u.id_usuario "
+				+ "order by n desc"
+		)
+@Table(name="Usuarios")
+public class Usuarios implements Pojo{
 	@Id
-	private int id_usuario;
-	@NotNull
+	@Column(name="id_usuario")
+	private Integer id_usuario;
+	@Column(name="nombre")
 	private String nombre;
-	@NotNull
+	@Column(name="correo")
 	private String correo;
+	@OneToMany(mappedBy="usuario")
+	private Collection<Logs> logs;
 	public int getId_usuario() {
 		return id_usuario;
 	}
