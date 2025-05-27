@@ -22,71 +22,65 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Modifier.*
 
-class RemainingStack(val actualStack: CircularLinkedList<Card>) {
-     val shwocoefficient: Float = 0.0f
-     var lastIndex = actualStack.size-1
+class RemainingStack(val actualStack: ArrayList<Card>): CardSource {
+     var lastIndex = -1
      var index = 0
-     var currentCard: Card?=null
      //Quitar de la lista
-     fun get(): Card {
-         currentCard?:throw OperationNotAllowedException()
-         if (index==lastIndex) index--
-         lastIndex--
-         return actualStack.remove(index)
+     override fun get(): Card {
+         val returnable= actualStack.removeAt(index)
+         if (lastIndex==index) index--
+         lastIndex=actualStack.size-1
+         return returnable
     }
-    //Evento (one and done logic)
-     fun peek() :Card? {
-        if (currentCard==null) {
-            index=0
-            currentCard=actualStack.get(0)
-            index++
-            return currentCard
-        } else if (index==actualStack.size){
-            currentCard=null
-            index++
-            return currentCard
-        } else {
-            currentCard=actualStack.get(index++)
-            return currentCard
-        }
-     }
-    //Persistente(hold logic) (ocurre despues de peek)
-    @Composable
-     fun ShowCards(currentCard: Card?) {
-        Box(Modifier.width(150.dp).height(400.dp) .background(Color(125, 255, 150, 255))){
-                if (actualStack.isEmpty()||index==actualStack.size) {
-                    Row (Modifier.padding(25.dp).align(Alignment.TopStart), horizontalArrangement = Arrangement.Center) {
-                        Box(
-                            Modifier
-                                .width(100.dp).height(150.dp)
-                                .background(Color(125, 255, 150, 255))
-                        ) {
-                            Box(
-                                Modifier.padding(3.dp).fillMaxSize().clip(RoundedCornerShape(5.dp,))
-                            )
-                            {
-                                Box(Modifier.background(Color.White).fillMaxSize())
-                            }
-                        }
-                    }
 
-                } else {
-                    Row (Modifier.padding(25.dp).align(Alignment.TopStart), horizontalArrangement = Arrangement.Center) {
-                        val cardBottomUp=actualStack.get(index+1)
-                        cardBottomUp.show=false
-                        cardBottomUp.ShowCard()
-                    }
+    override fun push(pushable: List<Card>):Boolean {
+        return false
+    }
+
+    fun get(index: Int): Card {
+        val returnable= actualStack.removeAt(index)
+       if (lastIndex==index) this.index--
+        lastIndex=actualStack.size-1
+        return returnable
+    }
+     fun peek() :Card {
+        if (index>lastIndex) index=0
+        return actualStack.get(index++)
+     }
+     init {
+         this.lastIndex=actualStack.size-1
+    }
+    //fun deal (state:Card) = {if (!Card.cardAlreadySelected) state = this@RemainingStack.peek()}
+    @Composable
+    fun ShowCards(index: Int,onClick: (Int)-> Unit,updater: (Card) -> Unit) {
+        val stack = remember { actualStack }
+        val empty by remember { mutableStateOf(actualStack.isEmpty()) }
+        Box(
+                Modifier
+                    .width(100.dp).height(225.dp).background(Color(125, 255, 150, 255))
+            ) {
+                Button( onClick = {
+                    onClick.invoke(index);
+                    stack.add(stack.removeAt(0))
                 }
-                if (actualStack.isEmpty()||currentCard==null) {
-                    Row (Modifier.padding(25.dp).align(Alignment.BottomCenter), horizontalArrangement = Arrangement.Center) {
+                    , modifier = Modifier.align(Alignment.TopCenter)) {
+                    Text("Deal")
+                }
+                if (empty ) {
+                    Row(
+                        Modifier.align(Alignment.BottomCenter).padding(8.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
                         Box(
                             Modifier
-                                .width(100.dp).height(150.dp)
+                                .width(66.dp).height(100.dp)
                                 .background(Color(125, 255, 150, 255))
                         ) {
                             Box(
-                                Modifier.padding(3.dp).fillMaxSize().clip(RoundedCornerShape(5.dp,))
+                                Modifier.padding(1.dp).fillMaxSize()
+                                    .clip(RoundedCornerShape(1.dp,))
                             )
                             {
                                 Box(Modifier.background(Color.White).fillMaxSize())
@@ -94,38 +88,42 @@ class RemainingStack(val actualStack: CircularLinkedList<Card>) {
                         }
                     }
                 } else {
-                    Row (Modifier.padding(25.dp).align(Alignment.BottomCenter), horizontalArrangement = Arrangement.Center) {
-                        currentCard!!.show=true
-                        currentCard!!.ShowCard()
+                    Row(
+                        Modifier.padding(8.dp).align(Alignment.BottomCenter),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Box {
+                            stack.reversed().forEach{
+                                it.show = true
+                                it.ShowCard(updater, null)
+                            }
+                        }
                     }
                 }
-        }
+            }
+
     }
 }
+
+
+
+
 @Composable
 @Preview
-fun hola() {
-    val b =remember {val list= CircularLinkedList<Card>()
-        list.put(Card(0,1,true))
-        list.put(Card(3,12,true))
-        list.put(Card(1,4,true))
-        list.put(Card(2,2,true))
-        list.put(Card(1,6,true))
-        list.put(Card(0,9,true))
-        list.put(Card(0,2,true)); RemainingStack(list) }
-    var state by remember { mutableStateOf(b.currentCard) }
-    adios(b,state, {state = it})
-}
-@Composable
-fun adios(circular: RemainingStack, state: Card?, onValueChange: (Card?)-> Unit) {
-    circular.ShowCards(state)
-    Box (Modifier.width(100.dp).height(100.dp), contentAlignment = Alignment.TopStart){
-        Button( onClick =
-            {
-                 onValueChange(circular.peek())
-            })
-        {
-            Text(text = "click me!!!")
+fun Hola() {
+    val b = remember { mutableListOf<Card>()}
+    b.add((Card(0,2,true)))
+    b.add(Card(1,2,true))
+    b.add(Card(2,2,true))
+    b.add(Card(3,2,true))
+    val c by remember { mutableStateOf(RemainingStack(ArrayList(b))) }
+    var int by remember { mutableIntStateOf(0) }
+    c.ShowCards(int,{if (int == c.actualStack.lastIndex) int =0 else int++} ) {}
+    Box(modifier = Modifier.fillMaxSize(),Alignment.Center) {
+        Button(onClick = { c.get();int-- }) {
+            Text(text = "b")
         }
     }
+    //adios(b,state) {state=it }
 }
+
