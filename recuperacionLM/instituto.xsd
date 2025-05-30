@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="cod_materia"> 
+        <xs:restriction base="xs:ID"/>
+    </xs:simpleType>
+    <xs:simpleType name="cod_materia_ref"> 
+        <xs:restriction base="xs:IDREF"/>
+    </xs:simpleType>
+    <xs:element name="instituto">
+       <xs:complexType>
+        <xs:sequence>
+            <xs:element name="alumnos">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="alumno" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="NRE">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:pattern value="[A-Z]\-[0-9]{8}"></xs:pattern>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="nombre" type="xs:string"></xs:element>
+                                    <xs:element name="apellido" type="xs:string"></xs:element>
+                                    <xs:element name="matricula">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="materia_cursada" maxOccurs="unbounded">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="calificacion" maxOccurs="unbounded" minOccurs="0">
+                                                                    <xs:complexType>
+                                                                        <xs:simpleContent>
+                                                                            <xs:extension base="xs:decimal">
+                                                                            <xs:attribute name="fecha" type="xs:date"></xs:attribute>
+                                                                            </xs:extension>
+                                                                        </xs:simpleContent>
+                                                                    </xs:complexType>                                                                
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute name="cod" type="cod_materia_ref"/>
+                                                        </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="promocion">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="PROMOCIONA"/>
+                                                <xs:enumeration value="NPROMOCIONA"/>
+                                                <xs:enumeration value="PROMOCIONACP"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name ="materias">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="materia" minOccurs="1" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="nombre_materia" type="xs:string"></xs:element>
+                                    <xs:element name="descripcion" type="xs:string"></xs:element>
+                                </xs:sequence>
+                                <xs:attribute name="cod" type="cod_materia"></xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="nombre" type="xs:string">
+
+        </xs:attribute>
+       </xs:complexType> 
+    </xs:element>
+</xs:schema>

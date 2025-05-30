@@ -1,0 +1,10 @@
+#1 
+//peso/text()
+#2
+fn:distinct-values(//peso/@unidad)
+#3
+//producto[@codigo='AAA-111']/peso
+#4
+//producto[peso/@unidad='g']/nombre
+#5
+//producto[peso/@unidad='g' and peso>'250' or (peso/@unidad='kg' and peso>'0.250')]/@codigo

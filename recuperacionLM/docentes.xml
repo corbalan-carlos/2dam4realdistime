@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="xslt2.xsl" type="text/xsl" ?>
+<listado_docentes>
+    <departamento codigo="CS001">
+        <nombre>Informatica</nombre>
+        <profesores>
+            <profesor nacimiento="1975">Sergio Rus</profesor>
+            <profesor nacimiento="1972">Maria Lopez</profesor>
+            <profesor nacimiento="1973">Ivan Ruiz</profesor>
+        </profesores>
+    </departamento>
+    <departamento codigo="EL002">
+        <nombre>Ingles</nombre>
+        <profesores>
+            <profesor nacimiento="1980">Isabel Perez</profesor>
+            <profesor nacimiento="1985">Carmen Garcia</profesor>
+        </profesores>
+    </departamento>
+</listado_docentes>

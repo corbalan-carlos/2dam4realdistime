@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE instituto SYSTEM "instituto.dtd">-->
+<instituto nombre="IES Cierva" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="instituto.xsd">
+	<alumnos>
+	<alumno>
+		<NRE>A-12345678</NRE>
+		<nombre>Pepito</nombre>
+		<apellido>Perez</apellido>
+		<matricula>
+			<materia_cursada cod="FIS001">
+				<calificacion fecha="2024-10-05">4.2</calificacion>	
+				<calificacion fecha="2024-10-05">4.5</calificacion>	
+			</materia_cursada>
+			<materia_cursada cod="QUIM001">
+				<calificacion fecha="2024-10-05">1.3</calificacion>	
+				<calificacion fecha="2024-10-05">3</calificacion>	
+			</materia_cursada>
+		</matricula>
+		<promocion>NPROMOCIONA</promocion>
+	</alumno>
+	<alumno>
+		<NRE>B-23456789</NRE>
+		<nombre>Juanito</nombre>
+		<apellido>Gonzalez</apellido>
+		<matricula>
+			<materia_cursada cod="MAT002">
+				<calificacion fecha="2024-10-05">6.7</calificacion>	
+				<calificacion fecha="2024-10-05">8</calificacion>	
+			</materia_cursada>
+			<materia_cursada cod="EFIS002">
+				<calificacion fecha="2024-10-05">6.4</calificacion>	
+				<calificacion fecha="2024-10-05">5.6</calificacion>	
+			</materia_cursada>
+		</matricula>
+		<promocion>PROMOCIONA</promocion>
+	</alumno>
+	<alumno>
+		<NRE>C-34567890</NRE>
+		<nombre>Fulanito</nombre>
+		<apellido>Perez</apellido>
+		<matricula>
+			<materia_cursada cod="ART003">
+				<calificacion fecha="2024-10-05">9.5</calificacion>	
+				<calificacion fecha="2024-10-05">3.2</calificacion>	
+			</materia_cursada>
+			<materia_cursada cod="FILO003">
+				<calificacion fecha="2024-10-05">4.5</calificacion>	
+				<calificacion fecha="2024-10-05">8.7</calificacion>	
+			</materia_cursada>
+		</matricula>
+		<promocion>PROMOCIONACP</promocion>
+	</alumno>
+	</alumnos>
+	<materias>
+		<materia cod="FIS001">
+			<nombre_materia>Fisca</nombre_materia>
+			<descripcion>Fisica de primero</descripcion>
+		</materia>
+		<materia cod="MAT002">
+			<nombre_materia>Matematicas</nombre_materia>
+			<descripcion>Matematicas de segundo</descripcion>
+		</materia>
+		<materia cod="ART003">
+			<nombre_materia>Arte Plastica</nombre_materia>
+			<descripcion>Arte plastica de tercero</descripcion>
+		</materia>
+		<materia cod="FILO003">
+			<nombre_materia>Filosofia</nombre_materia>
+			<descripcion>Filosofia de tercero</descripcion>
+		</materia>
+		<materia cod="EFIS002">
+			<nombre_materia>Educacion Fisica</nombre_materia>
+			<descripcion>E.Fisica de segundo</descripcion>
+		</materia>
+		<materia cod="QUIM001">
+			<nombre_materia>Quimica</nombre_materia>
+			<descripcion>Quimica de primero</descripcion>
+		</materia>
+	</materias>
+</instituto>
