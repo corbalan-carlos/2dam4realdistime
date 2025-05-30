@@ -1,0 +1,8 @@
+#a
+//premiado
+#b
+//premio[premiado='Marie Curie']/@categoria
+#c
+//premio[año='2007']/premiado
+#d
+//individuo[nombre=//premio[@categoria='literatura']]/nacido/@pais
