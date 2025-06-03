@@ -17,7 +17,7 @@ namespace RepasoBBDD
         public Form1()
         {
             
-            connection=new SqlConnection("Data Source=172.16.06.2;User ID=SA;Password=StrongPassw0rd!;Encrypt=False");
+            connection=new SqlConnection("Server = localhost\\SQLEXPRESS; Database = ejercicioDDBB; Trusted_Connection = True;");
             InitializeComponent();
         }
 
@@ -48,21 +48,22 @@ namespace RepasoBBDD
         private void button2_Click(object sender, EventArgs e)
         {
             SqlTransaction trans;
-            listView1.Items.Add(textBox1.Text).SubItems.Add(textBox2.Text);
             SqlCommand comand=new SqlCommand();
             connection.Open();
             trans = connection.BeginTransaction();
             comand.Connection = connection;
             comand.Transaction = trans;
-            comand.CommandText = $"insert into traduccion (esp,ing) values ( \'{textBox1.Text}\', \'{textBox2.Text}\' );";
+            comand.CommandText = $"insert into traduccion (esp,ing) values ( \'{textBox1.Text}\', \'{textBox3.Text}\' );";
             if (comand.ExecuteNonQuery() != 1)
             {
                 
                 trans.Rollback();
+                connection.Close();
                 return;
             }
             trans.Commit();
-            listView1.Items.Add(textBox1.Text).SubItems.Add(textBox2.Text);
+            ListViewItem lvi =listView1.Items.Add(textBox1.Text);
+            lvi.SubItems.Add(textBox3.Text);
             connection.Close() ;
         }
 
@@ -75,15 +76,66 @@ namespace RepasoBBDD
             trans=connection.BeginTransaction();
             command.Connection = connection;
             command.Transaction = trans;
-            command.CommandText = "update traduccion set esp=" + textBox1.Text + ",set ing=" + textBox2.Text+ "where esp=" + lvi.Text + " and ing=" + lvi.SubItems[0].Text + ";";
+            command.CommandText = $"update traduccion set esp=\'{textBox1.Text}\', ing=\'{textBox3.Text}\' where esp=\'{lvi.Text}\';";
             if (command.ExecuteNonQuery() != 1)
             {
                 trans.Rollback();
+                connection.Close();
                 return;
             }
             trans.Commit();
-            lvi.Text= textBox1.Text;
-            lvi.SubItems[0].Text = textBox2.Text;
+            lvi.SubItems[0].Text = textBox1.Text;
+            lvi.SubItems[1].Text = textBox3.Text;
+            connection.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ListViewItem lvi = listView1.SelectedItems[0];
+            SqlTransaction trans;
+            SqlCommand command = new SqlCommand();
+            connection.Open();
+            trans = connection.BeginTransaction();
+            command.Connection = connection;
+            command.Transaction = trans;
+            command.CommandText = $"delete from traduccion where esp=\'{lvi.Text}\';";
+            if (command.ExecuteNonQuery() != 1)
+            {
+                trans.Rollback();
+                connection.Close();
+                return;
+
+            }
+            trans.Commit();
+            lvi.Remove();
+            connection.Close() ;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand();
+            connection.Open();
+            command.Connection = connection;
+            if (comboBox1.SelectedIndex == 0)
+            {
+                command.CommandText = $"select esp from traduccion where esp=\'{textBox2.Text}\'";
+            } else
+            {
+                command.CommandText = $"select esp from traduccion where ing=\'{textBox2.Text}\'";
+            }
+            SqlDataReader reader= command.ExecuteReader();
+            if (reader.Read())
+            {
+                string a=reader.GetString(0);
+                foreach (ListViewItem item in listView1.Items)
+                {
+                    if (item.Text==a)
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
+            connection.Close();
         }
     }
 }

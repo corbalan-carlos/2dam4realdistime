@@ -136,6 +136,7 @@
             this.button3.TabIndex = 9;
             this.button3.Text = "Borrar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -161,8 +162,8 @@
             this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "ing",
-            "esp"});
+            "esp",
+            "ing"});
             this.comboBox1.Location = new System.Drawing.Point(548, 227);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(83, 21);
@@ -176,6 +177,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "Buscar";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
